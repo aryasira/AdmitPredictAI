@@ -1,81 +1,106 @@
 import React, { useEffect, useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { storage } from '../../lib/storage';
+import { Check } from 'lucide-react';
 
-export default function GrowthTracker() {
-    const [data, setData] = useState([]);
+const GrowthTracker = () => {
+    const [history, setHistory] = useState([]);
 
     useEffect(() => {
-        // Load history
-        const history = storage.getHistory() || [];
-        // Transform
-        const formatted = history.map((h, i) => ({
-            id: i,
-            score: h.overallScore,
-            date: new Date(h.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
+        const data = storage.getHistory().map(entry => ({
+            ...entry,
+            formattedDate: new Date(entry.timestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
         }));
-        setData(formatted);
+        setHistory(data);
     }, []);
 
-    if (data.length < 2) {
-        // Show empty state or nothing? 
-        // Prompt says "chart plotting... each time they update... new data point"
-        // Detailed view might look empty.
-        return (
-            <div className="card p-6 mt-8 opacity-70">
-                <h3 className="font-bold text-xl mb-2">Growth Tracker</h3>
-                <p className="text-sm text-[var(--color-text-muted)]">Update your profile multiple times to track how your admissibility score changes over time.</p>
-            </div>
-        );
-    }
+    // If no history, we can show a placeholder or just return null
+    if (history.length < 1) return null;
+
+    // Dummy Completed Actions for the demo
+    const completedActions = [
+        { title: 'Joined debate club', date: 'Jan 15, 2026' },
+        { title: 'Retook SAT', date: 'Jan 22, 2026' }
+    ];
 
     return (
-        <div className="card p-8 mt-8 animate-fade-in">
-            <div className="flex justify-between items-center mb-6">
-                <h3 className="font-display text-2xl">Admissibility Growth</h3>
-                <span className="text-sm text-[var(--color-text-muted)]">Tracking {data.length} updates</span>
-            </div>
+        <section className="bg-[#F5F0E8] py-20 px-6">
+            <div className="max-w-[1080px] mx-auto">
+                <span className="label">Your Progress</span>
+                <h3 className="font-serif font-bold text-3xl text-[#2C2220] mb-8">Track Your Growth Over Time</h3>
 
-            <div className="h-72 w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--color-cream)" />
-                        <XAxis
-                            dataKey="date"
-                            stroke="var(--color-text-muted)"
-                            fontSize={12}
-                            tickLine={false}
-                            axisLine={false}
-                            dy={10}
-                        />
-                        <YAxis
-                            domain={[0, 100]}
-                            stroke="var(--color-text-muted)"
-                            fontSize={12}
-                            tickLine={false}
-                            axisLine={false}
-                        />
-                        <Tooltip
-                            contentStyle={{
-                                borderRadius: '12px',
-                                border: '1px solid var(--color-recruit-cream)',
-                                boxShadow: 'var(--shadow-md)',
-                                fontFamily: 'var(--font-body)'
-                            }}
-                            cursor={{ stroke: 'var(--color-primary-green)', strokeWidth: 1 }}
-                        />
-                        <Line
-                            type="monotone"
-                            dataKey="score"
-                            stroke="var(--color-primary-green)"
-                            strokeWidth={3}
-                            dot={{ stroke: 'var(--color-primary-green)', strokeWidth: 2, r: 4, fill: '#fff' }}
-                            activeDot={{ r: 6, fill: 'var(--color-primary-green)' }}
-                            animationDuration={1500}
-                        />
-                    </LineChart>
-                </ResponsiveContainer>
+                <div className="grid md:grid-cols-3 gap-8">
+                    {/* Chart Column */}
+                    <div className="md:col-span-2 bg-white rounded-xl p-6 shadow-sm border border-[#D4C4A8]/30 h-[300px]">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <AreaChart data={history} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                                <defs>
+                                    <linearGradient id="colorScore" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="5%" stopColor="#2E7D32" stopOpacity={0.1}/>
+                                        <stop offset="95%" stopColor="#2E7D32" stopOpacity={0}/>
+                                    </linearGradient>
+                                </defs>
+                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F5F0E8" />
+                                <XAxis 
+                                    dataKey="formattedDate" 
+                                    axisLine={false} 
+                                    tickLine={false} 
+                                    tick={{ fill: '#8B7355', fontSize: 12 }} 
+                                    dy={10}
+                                />
+                                <YAxis 
+                                    domain={[0, 100]} 
+                                    hide={true} 
+                                />
+                                <Tooltip 
+                                    contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
+                                    cursor={{ stroke: '#2E7D32', strokeWidth: 1, strokeDasharray: '4 4' }}
+                                />
+                                <Area 
+                                    type="monotone" 
+                                    dataKey="score" 
+                                    stroke="#2E7D32" 
+                                    strokeWidth={3}
+                                    fill="url(#colorScore)" 
+                                    dot={{ fill: '#FFFFFF', stroke: '#2E7D32', strokeWidth: 2, r: 4 }}
+                                    activeDot={{ r: 6, fill: '#2E7D32', stroke: '#fff', strokeWidth: 2 }}
+                                />
+                            </AreaChart>
+                        </ResponsiveContainer>
+                    </div>
+
+                    {/* Actions Column */}
+                    <div>
+                        <h5 className="font-serif font-semibold text-lg text-[#2C2220] mb-4">Recent Milestones</h5>
+                        <div className="space-y-4">
+                            {completedActions.map((action, i) => (
+                                <div key={i} className="flex items-start gap-3">
+                                    <div className="w-5 h-5 rounded-full bg-[#E8F5E9] flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <Check size={12} className="text-[#2E7D32]" />
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-medium text-[#2C2220]">{action.title}</p>
+                                        <p className="text-xs text-[#8B7355] mt-0.5">{action.date}</p>
+                                    </div>
+                                </div>
+                            ))}
+                             {history.length > 0 && (
+                                <div className="flex items-start gap-3">
+                                    <div className="w-5 h-5 rounded-full bg-[#E8F5E9] flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <Check size={12} className="text-[#2E7D32]" />
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-medium text-[#2C2220]">Initial Assessment</p>
+                                        <p className="text-xs text-[#8B7355] mt-0.5">{new Date(history[0].timestamp).toLocaleDateString()}</p>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     );
-}
+};
+
+export default GrowthTracker;

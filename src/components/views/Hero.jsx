@@ -1,85 +1,160 @@
 import React, { useEffect, useState } from 'react';
-import { useVisitorCount } from '../../hooks/useVisitorCount';
+import { storage } from '../../lib/storage';
 
 export default function Hero({ setPage }) {
-    const visitorCount = useVisitorCount();
+    const [visitorCount, setVisitorCount] = useState(12847);
     const [visible, setVisible] = useState(false);
 
+    // Visitor Counter Logic & Animation
     useEffect(() => {
-        setVisible(true); // Trigger simple reveal
+        // Trigger animation
+        setTimeout(() => setVisible(true), 100);
+
+        async function init() {
+            let count = 12847; // Default base
+            
+            // 1. Get current count
+            try {
+                const stored = storage.get(storage.KEYS.VISITORS);
+                if (stored) {
+                    count = parseInt(stored, 10);
+                }
+            } catch (e) {
+                console.error("Visitor read error", e);
+            }
+
+            // 2. Increment if new session
+            const hasVisited = sessionStorage.getItem('ap_session_active');
+            if (!hasVisited) {
+                count += 1;
+                sessionStorage.setItem('ap_session_active', 'true');
+                storage.set(storage.KEYS.VISITORS, count);
+            }
+            
+            setVisitorCount(count);
+        }
+        init();
+
+        // 3. Polling every 5 seconds
+        const poll = setInterval(() => {
+            const stored = storage.get(storage.KEYS.VISITORS);
+            if (stored) {
+                setVisitorCount(parseInt(stored, 10));
+            }
+        }, 5000);
+
+        return () => clearInterval(poll);
     }, []);
 
     return (
         <>
-            {/* 3a. HERO (white, two-col) */}
-            <section className="section section--white">
-                <div className="section__inner" style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1.1fr 0.9fr',
-                    gap: '60px',
-                    alignItems: 'center',
-                    minHeight: '420px',
+            {/* 4a. HERO (white, two-col) */}
+            <section className="section" style={{ background: '#FFFFFF', padding: '80px 24px' }}>
+                <div style={{
+                    maxWidth: '1080px', margin: '0 auto',
+                    display: 'grid', gridTemplateColumns: '1.22fr 1fr', // ~55% / 45%
+                    gap: '60px', alignItems: 'center'
                 }}>
                     {/* LEFT COLUMN */}
-                    <div className={`reveal ${visible ? 'visible' : ''}`}>
-                        <span className="label">AI-Powered Admissions Intelligence</span>
-                        <h1>Get Into Your<br />Top-Choice Schools.</h1>
-                        <p style={{ marginTop: '20px', fontSize: '16px', maxWidth: '480px' }}>
+                    <div className={`reveal ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0s' }}>
+                        <div style={{
+                            fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '11.5px',
+                            color: '#8B7355', textTransform: 'uppercase', letterSpacing: '0.16em', marginBottom: '24px'
+                        }}>
+                            AI-Powered Admissions Intelligence
+                        </div>
+                        <h1 style={{
+                            fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: '48px',
+                            color: '#2C2220', lineHeight: 1.12, marginBottom: '24px'
+                        }}>
+                            Get Into Your<br />Top-Choice Schools.
+                        </h1>
+                        <p style={{
+                            fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: '16px',
+                            color: '#4A4A4A', lineHeight: 1.75, maxWidth: '480px', marginBottom: '32px'
+                        }}>
                             Stop guessing. Our AI analyzes your profile against real Common Data Set
                             statistics to predict your admission chances with precision.
                         </p>
-                        <button className="btn-primary" style={{ marginTop: '32px' }} onClick={() => setPage('profile')}>
+                        
+                        <button className="btn-primary" onClick={() => setPage('profile')}>
                             GET STARTED →
                         </button>
 
-                        <div style={{ marginTop: '36px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-                            <span style={{ fontSize: '12px', color: '#7A7A7A', fontFamily: "'Inter', sans-serif" }}>
+                        <div style={{ marginTop: '48px', display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+                            <span style={{ fontSize: '12px', color: '#9CA3AF', fontFamily: "'Inter', sans-serif" }}>
                                 Powered by
                             </span>
                             {['Common Data Sets', 'College Scorecard', 'Meta Llama'].map(s => (
                                 <span key={s} style={{
                                     fontSize: '11px', fontFamily: "'Inter', sans-serif", fontWeight: 500,
                                     color: '#8B7355', background: '#F5F0E8', padding: '4px 10px', borderRadius: '20px',
+                                    whiteSpace: 'nowrap'
                                 }}>{s}</span>
                             ))}
                         </div>
                     </div>
 
-                    {/* RIGHT COLUMN */}
-                    <div className={`reveal md:block hidden ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0.12s' }}>
+                    {/* RIGHT COLUMN - Prediction Card */}
+                    <div className={`reveal md:block hidden ${visible ? 'visible' : ''}`} style={{ transitionDelay: '0.15s' }}>
                         <div style={{
-                            background: '#FFFFFF', borderRadius: '16px',
-                            boxShadow: '0 8px 40px rgba(0,0,0,0.10)', padding: '32px',
-                            maxWidth: '360px', margin: '0 auto',
+                            background: '#FFFFFF', borderRadius: '12px',
+                            boxShadow: '0 2px 16px rgba(0,0,0,0.07)', padding: '32px',
+                            maxWidth: '360px', margin: '0 auto', position: 'relative'
                         }}>
-                            <span style={{ fontSize: '11px', fontFamily: "'Inter',sans-serif", fontWeight: 500, color: '#8B7355', textTransform: 'uppercase', letterSpacing: '0.14em' }}>
+                            <div style={{ fontSize: '11px', color: '#8B7355', textTransform: 'uppercase', letterSpacing: '0.14em', fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>
                                 Sample Prediction
-                            </span>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginTop: '20px' }}>
-                                <svg width="88" height="88" viewBox="0 0 88 88">
-                                    <circle cx="44" cy="44" r="36" fill="none" stroke="#E8F5E9" strokeWidth="8" />
-                                    <circle cx="44" cy="44" r="36" fill="none" stroke="#2E7D32" strokeWidth="8"
-                                        strokeDasharray="226" strokeDashoffset="56" strokeLinecap="round"
-                                        transform="rotate(-90 44 44)" />
-                                    <text x="44" y="52" textAnchor="middle" fontFamily="'Inter',sans-serif" fontWeight="700" fontSize="20" fill="#2C2220">84%</text>
-                                </svg>
+                            </div>
+
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginTop: '24px' }}>
+                                {/* SVG Ring */}
+                                <div style={{ position: 'relative', width: '88px', height: '88px' }}>
+                                    <svg width="88" height="88" viewBox="0 0 88 88">
+                                        <circle cx="44" cy="44" r="36" fill="none" stroke="#E8F5E9" strokeWidth="6" />
+                                        <circle cx="44" cy="44" r="36" fill="none" stroke="#2E7D32" strokeWidth="6"
+                                            strokeDasharray="226" strokeDashoffset="36" strokeLinecap="round"
+                                            transform="rotate(-90 44 44)" />
+                                    </svg>
+                                    <div style={{
+                                        position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+                                        fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: '20px', color: '#2C2220'
+                                    }}>
+                                        84%
+                                    </div>
+                                </div>
+
                                 <div>
-                                    <div style={{ fontFamily: "'Playfair Display',serif", fontWeight: 600, fontSize: '17px', color: '#2C2220' }}>Stanford University</div>
-                                    <div style={{ fontFamily: "'Inter',sans-serif", fontSize: '13px', color: '#7A7A7A', marginTop: '4px' }}>Reach School</div>
-                                    <span style={{
+                                    <div style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: '18px', color: '#2C2220' }}>
+                                        Stanford<br/>University
+                                    </div>
+                                    <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#7A7A7A', marginTop: '4px' }}>
+                                        Reach School
+                                    </div>
+                                    <div style={{
                                         display: 'inline-block', marginTop: '8px',
                                         background: '#FEF3C7', color: '#92400E',
-                                        fontSize: '11px', fontWeight: 600, fontFamily: "'Inter',sans-serif",
-                                        padding: '3px 10px', borderRadius: '20px', textTransform: 'uppercase', letterSpacing: '0.08em',
-                                    }}>Reach</span>
+                                        fontSize: '11px', fontWeight: 600, fontFamily: "'Inter', sans-serif",
+                                        padding: '4px 10px', borderRadius: '20px', textTransform: 'uppercase', letterSpacing: '0.08em'
+                                    }}>
+                                        Reach
+                                    </div>
                                 </div>
                             </div>
-                            <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid #D4C4A8' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', fontFamily: "'Inter',sans-serif", color: '#4A4A4A' }}>
-                                    <span>Academic Fit</span><span style={{ fontWeight: 600, color: '#2E7D32' }}>Strong</span>
+
+                            <div style={{ height: '1px', background: '#D4C4A8', margin: '24px 0', opacity: 0.5 }}></div>
+
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#4A4A4A' }}>Academic Fit</span>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', fontWeight: 600, color: '#2E7D32' }}>Strong</span>
+                                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#2E7D32' }}></div>
                                 </div>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', fontFamily: "'Inter',sans-serif", color: '#4A4A4A', marginTop: '6px' }}>
-                                    <span>Extracurriculars</span><span style={{ fontWeight: 600, color: '#F59E0B' }}>Needs Work</span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#4A4A4A' }}>Extracurriculars</span>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', fontWeight: 600, color: '#F59E0B' }}>Needs Work</span>
+                                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#F59E0B' }}></div>
                                 </div>
                             </div>
                         </div>
@@ -87,77 +162,69 @@ export default function Hero({ setPage }) {
                 </div>
             </section>
 
-            {/* 3b. LIVE VISITOR COUNTER (Cream) */}
-            <section className="section section--cream" style={{ padding: '32px 24px' }}>
-                <div style={{ textAlign: 'center' }}>
-                    <p style={{ fontSize: '14px', color: '#7A7A7A', fontFamily: "'Inter', sans-serif" }}>
-                        👁 <strong style={{ color: '#2C2220', fontSize: '15px' }}>{visitorCount.toLocaleString()}</strong> students have used AdmitPredict AI
-                    </p>
-                </div>
+            {/* 4b. VISITOR COUNTER (Cream) */}
+            <section style={{ background: '#F5F0E8', padding: '32px 24px', textAlign: 'center' }}>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', color: '#7A7A7A' }}>
+                    <span style={{ marginRight: '8px' }}>👁</span>
+                    <strong style={{ color: '#2C2220', fontSize: '15px', fontWeight: 600 }}>{visitorCount.toLocaleString()}</strong> students have used AdmitPredict AI
+                </p>
             </section>
 
-            {/* 3c. HOW IT WORKS */}
-            <section className="section section--white">
-                <div className="section__inner">
-                    <span className="label">How It Works</span>
-                    <h3>Three Steps to Your Prediction</h3>
-                    <p style={{ maxWidth: '540px', marginTop: '12px' }}>
-                        Build your profile, let our AI do the heavy lifting, and get a personalized roadmap to your dream schools.
-                    </p>
-
-                    <div className="reveal-stagger visible" style={{
-                        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px', marginTop: '48px',
+            {/* 4d. WHY ADMITPREDICT (White) - Alternating fix: 4b is Cream, so 4d should be White if 4c is gone.
+               Wait, 4a is White. 4b is Cream. 4d (Why) was Cream.
+               If I remove 4c (White), I have Cream (4b) then Cream (4d).
+               I need to make 4d White to alternate properly.
+            */}
+            <section style={{ background: '#FFFFFF', padding: '80px 24px' }}>
+                <div style={{ maxWidth: '1080px', margin: '0 auto', textAlign: 'center' }}>
+                    <div style={{
+                        fontFamily: "'Inter', sans-serif", fontWeight: 500, fontSize: '11.5px',
+                        color: '#8B7355', textTransform: 'uppercase', letterSpacing: '0.16em', marginBottom: '16px'
                     }}>
-                        {[
-                            { num: 1, title: 'Build Your Profile', desc: 'Enter your grades, test scores, extracurriculars, and target schools in a quick guided form.' },
-                            { num: 2, title: 'AI Analyzes', desc: 'Our AI compares your stats against real Common Data Set data for each school you are targeting.' },
-                            { num: 3, title: 'Get Your Plan', desc: 'Receive personalized predictions for every target school plus actionable steps to improve your odds.' },
-                        ].map((step, i) => (
-                            <div key={i} style={{ textAlign: 'left' }}>
-                                <div style={{
-                                    width: '40px', height: '40px', borderRadius: '50%',
-                                    background: '#2E7D32', color: '#fff',
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    fontFamily: "'Inter',sans-serif", fontWeight: 700, fontSize: '16px',
-                                }}>{step.num}</div>
-                                <h5 style={{ marginTop: '16px' }}>{step.title}</h5>
-                                <p style={{ marginTop: '8px', fontSize: '14px' }}>{step.desc}</p>
-                            </div>
-                        ))}
+                        Why AdmitPredict
                     </div>
-                </div>
-            </section>
-
-            {/* 3d. WHY US (Cream) */}
-            <section className="section section--cream">
-                <div className="section__inner">
-                    <span className="label">Why AdmitPredict</span>
-                    <h3>The AdmitPredict Advantage</h3>
-                    <div className="reveal-stagger visible" style={{
-                        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '40px', marginTop: '48px',
+                    <h3 style={{
+                        fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: '32px',
+                        color: '#2C2220', marginBottom: '64px'
                     }}>
+                        The AdmitPredict Advantage
+                    </h3>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '48px', textAlign: 'left' }}>
                         {[
-                            { title: 'Real Data', desc: 'Predictions grounded in Common Data Sets and College Scorecard data — the same stats admissions offices publish.' },
-                            { title: 'Personalized Recs', desc: 'Get specific, actionable recommendations tailored to your profile — not generic advice.' },
-                            { title: 'Powered by AI', desc: 'Meta Llama reasons through your profile the way an expert advisor would, but instantly.' },
-                        ].map((f, i) => (
+                            { title: 'Real Data Sources', desc: 'We aggregate data from Common Data Sets and College Scorecard to ensure accuracy, not just guesswork.' },
+                            { title: 'Personalized Recs', desc: 'Your extracurriculars and major choice matter. We weigh these factors heavily in our prediction model.' },
+                            { title: 'Powered by Llama 3', desc: 'Our reasoning engine uses the latest open-source LLMs to provide qualitative feedback on your profile.' }
+                        ].map((feature, i) => (
                             <div key={i}>
-                                <h5>{f.title}</h5>
-                                <p style={{ marginTop: '8px', fontSize: '14px' }}>{f.desc}</p>
+                                <h5 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: '16px', color: '#2C2220', marginBottom: '12px' }}>
+                                    {feature.title}
+                                </h5>
+                                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', color: '#4A4A4A', lineHeight: 1.6 }}>
+                                    {feature.desc}
+                                </p>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* 3e. CTA (White) */}
-            <section className="section section--white" style={{ textAlign: 'center' }}>
-                <div className="section__inner reveal visible">
-                    <h3>Ready to see where you stand?</h3>
-                    <p style={{ maxWidth: '480px', margin: '12px auto 0' }}>
-                        Build your profile in under 2 minutes and get your personalized admissions prediction.
+            {/* 4e. BOTTOM CTA (Cream) - Alternating from 4d (White) */}
+            <section style={{ background: '#F5F0E8', padding: '100px 24px', textAlign: 'center' }}>
+                <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+                    <h3 style={{
+                        fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: '32px',
+                        color: '#2C2220', marginBottom: '16px'
+                    }}>
+                        Ready to see where you stand?
+                    </h3>
+                    <p style={{
+                        fontFamily: "'Inter', sans-serif", fontSize: '16px', color: '#4A4A4A',
+                        marginBottom: '32px'
+                    }}>
+                        Build your profile in under 2 minutes and get your personalized admissions chances immediately.
                     </p>
-                    <button className="btn-primary" style={{ marginTop: '28px' }} onClick={() => setPage('profile')}>
+                    <button className="btn-primary" onClick={() => setPage('profile')}>
                         GET STARTED →
                     </button>
                 </div>

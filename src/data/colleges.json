@@ -1,317 +1,552 @@
 [
-    {
-        "id": "harvard",
-        "name": "Harvard University",
-        "state": "MA",
-        "type": "Private",
-        "acceptanceRate": 0.034,
-        "gpaRange": [
-            3.9,
-            4.2
-        ],
-        "satRange": [
-            1460,
-            1580
-        ],
-        "actRange": [
-            33,
-            36
-        ],
-        "ap admitted": 95,
-        "enrollment": 7153
-    },
-    {
-        "id": "stanford",
-        "name": "Stanford University",
-        "state": "CA",
-        "type": "Private",
-        "acceptanceRate": 0.039,
-        "gpaRange": [
-            3.8,
-            4.1
-        ],
-        "satRange": [
-            1440,
-            1570
-        ],
-        "actRange": [
-            32,
-            35
-        ],
-        "ap admitted": 92,
-        "enrollment": 7645
-    },
-    {
-        "id": "mit",
-        "name": "MIT",
-        "state": "MA",
-        "type": "Private",
-        "acceptanceRate": 0.041,
-        "gpaRange": [
-            3.9,
-            4.2
-        ],
-        "satRange": [
-            1510,
-            1570
-        ],
-        "actRange": [
-            34,
-            36
-        ],
-        "ap admitted": 96,
-        "enrollment": 4602
-    },
-    {
-        "id": "princeton",
-        "name": "Princeton University",
-        "state": "NJ",
-        "type": "Private",
-        "acceptanceRate": 0.044,
-        "gpaRange": [
-            3.8,
-            4.1
-        ],
-        "satRange": [
-            1460,
-            1570
-        ],
-        "actRange": [
-            32,
-            35
-        ],
-        "ap admitted": 93,
-        "enrollment": 5321
-    },
-    {
-        "id": "yale",
-        "name": "Yale University",
-        "state": "CT",
-        "type": "Private",
-        "acceptanceRate": 0.045,
-        "gpaRange": [
-            3.8,
-            4.1
-        ],
-        "satRange": [
-            1460,
-            1570
-        ],
-        "actRange": [
-            33,
-            35
-        ],
-        "ap admitted": 91,
-        "enrollment": 6092
-    },
-    {
-        "id": "ucla",
-        "name": "UCLA",
-        "state": "CA",
-        "type": "Public",
-        "acceptanceRate": 0.108,
-        "gpaRange": [
-            3.7,
-            4.0
-        ],
-        "satRange": [
-            1360,
-            1530
-        ],
-        "actRange": [
-            30,
-            34
-        ],
-        "ap admitted": 88,
-        "enrollment": 31543
-    },
-    {
-        "id": "berkeley",
-        "name": "UC Berkeley",
-        "state": "CA",
-        "type": "Public",
-        "acceptanceRate": 0.114,
-        "gpaRange": [
-            3.8,
-            4.0
-        ],
-        "satRange": [
-            1340,
-            1540
-        ],
-        "actRange": [
-            30,
-            35
-        ],
-        "ap admitted": 90,
-        "enrollment": 30500
-    },
-    {
-        "id": "umich",
-        "name": "University of Michigan",
-        "state": "MI",
-        "type": "Public",
-        "acceptanceRate": 0.177,
-        "gpaRange": [
-            3.6,
-            4.0
-        ],
-        "satRange": [
-            1340,
-            1530
-        ],
-        "actRange": [
-            31,
-            35
-        ],
-        "ap admitted": 85,
-        "enrollment": 32282
-    },
-    {
-        "id": "ut_austin",
-        "name": "UT Austin",
-        "state": "TX",
-        "type": "Public",
-        "acceptanceRate": 0.287,
-        "gpaRange": [
-            3.5,
-            3.9
-        ],
-        "satRange": [
-            1230,
-            1480
-        ],
-        "actRange": [
-            29,
-            34
-        ],
-        "ap admitted": 80,
-        "enrollment": 40916
-    },
-    {
-        "id": "nyu",
-        "name": "NYU",
-        "state": "NY",
-        "type": "Private",
-        "acceptanceRate": 0.125,
-        "gpaRange": [
-            3.6,
-            3.9
-        ],
-        "satRange": [
-            1400,
-            1520
-        ],
-        "actRange": [
-            31,
-            34
-        ],
-        "ap admitted": 82,
-        "enrollment": 29401
-    },
-    {
-        "id": "usc",
-        "name": "USC",
-        "state": "CA",
-        "type": "Private",
-        "acceptanceRate": 0.12,
-        "gpaRange": [
-            3.7,
-            4.0
-        ],
-        "satRange": [
-            1410,
-            1530
-        ],
-        "actRange": [
-            32,
-            35
-        ],
-        "ap admitted": 86,
-        "enrollment": 20400
-    },
-    {
-        "id": "duke",
-        "name": "Duke University",
-        "state": "NC",
-        "type": "Private",
-        "acceptanceRate": 0.059,
-        "gpaRange": [
-            3.8,
-            4.1
-        ],
-        "satRange": [
-            1480,
-            1570
-        ],
-        "actRange": [
-            33,
-            35
-        ],
-        "ap admitted": 94,
-        "enrollment": 6789
-    },
-    {
-        "id": "northwestern",
-        "name": "Northwestern University",
-        "state": "IL",
-        "type": "Private",
-        "acceptanceRate": 0.07,
-        "gpaRange": [
-            3.8,
-            4.1
-        ],
-        "satRange": [
-            1460,
-            1550
-        ],
-        "actRange": [
-            33,
-            35
-        ],
-        "ap admitted": 92,
-        "enrollment": 8327
-    },
-    {
-        "id": "jhu",
-        "name": "Johns Hopkins",
-        "state": "MD",
-        "type": "Private",
-        "acceptanceRate": 0.065,
-        "gpaRange": [
-            3.9,
-            4.0
-        ],
-        "satRange": [
-            1510,
-            1560
-        ],
-        "actRange": [
-            34,
-            35
-        ],
-        "ap admitted": 95,
-        "enrollment": 6023
-    },
-    {
-        "id": "upenn",
-        "name": "UPenn",
-        "state": "PA",
-        "type": "Private",
-        "acceptanceRate": 0.059,
-        "gpaRange": [
-            3.8,
-            4.1
-        ],
-        "satRange": [
-            1480,
-            1570
-        ],
-        "actRange": [
-            33,
-            35
-        ],
-        "ap admitted": 91,
-        "enrollment": 10033
-    }
+  {
+    "id": "harvard",
+    "name": "Harvard University",
+    "location": "Cambridge, MA",
+    "acceptanceRate": 0.034,
+    "gpaAverage": 4.18,
+    "satAverage": 1520,
+    "actAverage": 34,
+    "tuition": 57261,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "stanford",
+    "name": "Stanford University",
+    "location": "Stanford, CA",
+    "acceptanceRate": 0.039,
+    "gpaAverage": 4.18,
+    "satAverage": 1505,
+    "actAverage": 34,
+    "tuition": 56169,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Very Important" }
+  },
+  {
+    "id": "mit",
+    "name": "Massachusetts Institute of Technology",
+    "location": "Cambridge, MA",
+    "acceptanceRate": 0.041,
+    "gpaAverage": 4.17,
+    "satAverage": 1535,
+    "actAverage": 35,
+    "tuition": 55878,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "princeton",
+    "name": "Princeton University",
+    "location": "Princeton, NJ",
+    "acceptanceRate": 0.044,
+    "gpaAverage": 4.15,
+    "satAverage": 1505,
+    "actAverage": 34,
+    "tuition": 56010,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Very Important" }
+  },
+  {
+    "id": "yale",
+    "name": "Yale University",
+    "location": "New Haven, CT",
+    "acceptanceRate": 0.046,
+    "gpaAverage": 4.14,
+    "satAverage": 1510,
+    "actAverage": 34,
+    "tuition": 59950,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Very Important" }
+  },
+  {
+    "id": "columbia",
+    "name": "Columbia University",
+    "location": "New York, NY",
+    "acceptanceRate": 0.039,
+    "gpaAverage": 4.12,
+    "satAverage": 1505,
+    "actAverage": 34,
+    "tuition": 63530,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "caltech",
+    "name": "California Institute of Technology",
+    "location": "Pasadena, CA",
+    "acceptanceRate": 0.039,
+    "gpaAverage": 4.19,
+    "satAverage": 1545,
+    "actAverage": 35,
+    "tuition": 58680,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "upenn",
+    "name": "University of Pennsylvania",
+    "location": "Philadelphia, PA",
+    "acceptanceRate": 0.059,
+    "gpaAverage": 4.10,
+    "satAverage": 1500,
+    "actAverage": 34,
+    "tuition": 61710,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "brown",
+    "name": "Brown University",
+    "location": "Providence, RI",
+    "acceptanceRate": 0.054,
+    "gpaAverage": 4.08,
+    "satAverage": 1495,
+    "actAverage": 34,
+    "tuition": 60696,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Very Important" }
+  },
+  {
+    "id": "duke",
+    "name": "Duke University",
+    "location": "Durham, NC",
+    "acceptanceRate": 0.059,
+    "gpaAverage": 4.13,
+    "satAverage": 1510,
+    "actAverage": 34,
+    "tuition": 60244,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Very Important" }
+  },
+  {
+    "id": "dartmouth",
+    "name": "Dartmouth College",
+    "location": "Hanover, NH",
+    "acceptanceRate": 0.062,
+    "gpaAverage": 4.11,
+    "satAverage": 1485,
+    "actAverage": 33,
+    "tuition": 60687,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "uchicago",
+    "name": "University of Chicago",
+    "location": "Chicago, IL",
+    "acceptanceRate": 0.065,
+    "gpaAverage": 4.15,
+    "satAverage": 1520,
+    "actAverage": 34,
+    "tuition": 60963,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Very Important" }
+  },
+  {
+    "id": "northwestern",
+    "name": "Northwestern University",
+    "location": "Evanston, IL",
+    "acceptanceRate": 0.070,
+    "gpaAverage": 4.10,
+    "satAverage": 1495,
+    "actAverage": 34,
+    "tuition": 60768,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "jhu",
+    "name": "Johns Hopkins University",
+    "location": "Baltimore, MD",
+    "acceptanceRate": 0.075,
+    "gpaAverage": 4.12,
+    "satAverage": 1520,
+    "actAverage": 34,
+    "tuition": 58720,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "cornell",
+    "name": "Cornell University",
+    "location": "Ithaca, NY",
+    "acceptanceRate": 0.087,
+    "gpaAverage": 4.07,
+    "satAverage": 1480,
+    "actAverage": 34,
+    "tuition": 61015,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "rice",
+    "name": "Rice University",
+    "location": "Houston, TX",
+    "acceptanceRate": 0.093,
+    "gpaAverage": 4.12,
+    "satAverage": 1505,
+    "actAverage": 34,
+    "tuition": 54960,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Very Important" }
+  },
+  {
+    "id": "vanderbilt",
+    "name": "Vanderbilt University",
+    "location": "Nashville, TN",
+    "acceptanceRate": 0.071,
+    "gpaAverage": 4.10,
+    "satAverage": 1495,
+    "actAverage": 34,
+    "tuition": 56966,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "nd",
+    "name": "University of Notre Dame",
+    "location": "Notre Dame, IN",
+    "acceptanceRate": 0.129,
+    "gpaAverage": 4.06,
+    "satAverage": 1475,
+    "actAverage": 33,
+    "tuition": 59794,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "wustl",
+    "name": "Washington University in St. Louis",
+    "location": "St. Louis, MO",
+    "acceptanceRate": 0.110,
+    "gpaAverage": 4.15,
+    "satAverage": 1505,
+    "actAverage": 34,
+    "tuition": 58901,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "ucla",
+    "name": "University of California, Los Angeles",
+    "location": "Los Angeles, CA",
+    "acceptanceRate": 0.108,
+    "gpaAverage": 4.18,
+    "satAverage": null,
+    "actAverage": null,
+    "tuition": 13268,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "berkeley",
+    "name": "University of California, Berkeley",
+    "location": "Berkeley, CA",
+    "acceptanceRate": 0.145,
+    "gpaAverage": 4.17,
+    "satAverage": null,
+    "actAverage": null,
+    "tuition": 14226,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "georgetown",
+    "name": "Georgetown University",
+    "location": "Washington, DC",
+    "acceptanceRate": 0.120,
+    "gpaAverage": 4.01,
+    "satAverage": 1465,
+    "actAverage": 33,
+    "tuition": 61200,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Very Important" }
+  },
+  {
+    "id": "emory",
+    "name": "Emory University",
+    "location": "Atlanta, GA",
+    "acceptanceRate": 0.130,
+    "gpaAverage": 4.00,
+    "satAverage": 1450,
+    "actAverage": 32,
+    "tuition": 57948,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "cmu",
+    "name": "Carnegie Mellon University",
+    "location": "Pittsburgh, PA",
+    "acceptanceRate": 0.135,
+    "gpaAverage": 4.05,
+    "satAverage": 1510,
+    "actAverage": 34,
+    "tuition": 61344,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Very Important" }
+  },
+  {
+    "id": "usc",
+    "name": "University of Southern California",
+    "location": "Los Angeles, CA",
+    "acceptanceRate": 0.120,
+    "gpaAverage": 4.00,
+    "satAverage": 1460,
+    "actAverage": 33,
+    "tuition": 63468,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "uva",
+    "name": "University of Virginia",
+    "location": "Charlottesville, VA",
+    "acceptanceRate": 0.187,
+    "gpaAverage": 4.32,
+    "satAverage": 1430,
+    "actAverage": 32,
+    "tuition": 18960,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "umich",
+    "name": "University of Michigan",
+    "location": "Ann Arbor, MI",
+    "acceptanceRate": 0.200,
+    "gpaAverage": 3.90,
+    "satAverage": 1435,
+    "actAverage": 33,
+    "tuition": 16178,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "unc",
+    "name": "University of North Carolina at Chapel Hill",
+    "location": "Chapel Hill, NC",
+    "acceptanceRate": 0.192,
+    "gpaAverage": 4.39,
+    "satAverage": 1390,
+    "actAverage": 31,
+    "tuition": 9021,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Very Important" }
+  },
+  {
+    "id": "nyu",
+    "name": "New York University",
+    "location": "New York, NY",
+    "acceptanceRate": 0.125,
+    "gpaAverage": 3.70,
+    "satAverage": 1455,
+    "actAverage": 33,
+    "tuition": 56500,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "tufts",
+    "name": "Tufts University",
+    "location": "Medford, MA",
+    "acceptanceRate": 0.097,
+    "gpaAverage": 4.04,
+    "satAverage": 1465,
+    "actAverage": 33,
+    "tuition": 63804,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "bc",
+    "name": "Boston College",
+    "location": "Chestnut Hill, MA",
+    "acceptanceRate": 0.167,
+    "gpaAverage": 3.96,
+    "satAverage": 1420,
+    "actAverage": 33,
+    "tuition": 62950,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "gatech",
+    "name": "Georgia Institute of Technology",
+    "location": "Atlanta, GA",
+    "acceptanceRate": 0.160,
+    "gpaAverage": 4.00,
+    "satAverage": 1435,
+    "actAverage": 32,
+    "tuition": 12852,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "ucsd",
+    "name": "University of California, San Diego",
+    "location": "La Jolla, CA",
+    "acceptanceRate": 0.237,
+    "gpaAverage": 4.15,
+    "satAverage": null,
+    "actAverage": null,
+    "tuition": 14648,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "uci",
+    "name": "University of California, Irvine",
+    "location": "Irvine, CA",
+    "acceptanceRate": 0.210,
+    "gpaAverage": 4.15,
+    "satAverage": null,
+    "actAverage": null,
+    "tuition": 13932,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "ucsb",
+    "name": "University of California, Santa Barbara",
+    "location": "Santa Barbara, CA",
+    "acceptanceRate": 0.258,
+    "gpaAverage": 4.13,
+    "satAverage": null,
+    "actAverage": null,
+    "tuition": 14417,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "ufl",
+    "name": "University of Florida",
+    "location": "Gainesville, FL",
+    "acceptanceRate": 0.233,
+    "gpaAverage": 4.40,
+    "satAverage": 1360,
+    "actAverage": 30,
+    "tuition": 6380,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "ut-austin",
+    "name": "University of Texas at Austin",
+    "location": "Austin, TX",
+    "acceptanceRate": 0.287,
+    "gpaAverage": 3.85,
+    "satAverage": 1355,
+    "actAverage": 30,
+    "tuition": 11752,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "uiuc",
+    "name": "University of Illinois at Urbana-Champaign",
+    "location": "Champaign, IL",
+    "acceptanceRate": 0.448,
+    "gpaAverage": 3.70,
+    "satAverage": 1410,
+    "actAverage": 31,
+    "tuition": 16866,
+    "cds": { "gpaImportance": "Important", "rigorImportance": "Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "uw-madison",
+    "name": "University of Wisconsin-Madison",
+    "location": "Madison, WI",
+    "acceptanceRate": 0.491,
+    "gpaAverage": 3.88,
+    "satAverage": 1390,
+    "actAverage": 30,
+    "tuition": 10720,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "bu",
+    "name": "Boston University",
+    "location": "Boston, MA",
+    "acceptanceRate": 0.144,
+    "gpaAverage": 3.80,
+    "satAverage": 1420,
+    "actAverage": 32,
+    "tuition": 61050,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "northeastern",
+    "name": "Northeastern University",
+    "location": "Boston, MA",
+    "acceptanceRate": 0.068,
+    "gpaAverage": 4.04,
+    "satAverage": 1475,
+    "actAverage": 34,
+    "tuition": 59100,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "tulane",
+    "name": "Tulane University",
+    "location": "New Orleans, LA",
+    "acceptanceRate": 0.115,
+    "gpaAverage": 3.64,
+    "satAverage": 1435,
+    "actAverage": 32,
+    "tuition": 60814,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "pepperdine",
+    "name": "Pepperdine University",
+    "location": "Malibu, CA",
+    "acceptanceRate": 0.400,
+    "gpaAverage": 3.69,
+    "satAverage": 1320,
+    "actAverage": 29,
+    "tuition": 60130,
+    "cds": { "gpaImportance": "Important", "rigorImportance": "Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "osu",
+    "name": "Ohio State University",
+    "location": "Columbus, OH",
+    "acceptanceRate": 0.520,
+    "gpaAverage": 3.76,
+    "satAverage": 1340,
+    "actAverage": 29,
+    "tuition": 11936,
+    "cds": { "gpaImportance": "Important", "rigorImportance": "Important", "essayImportance": "Considered" }
+  },
+  {
+    "id": "purdue",
+    "name": "Purdue University",
+    "location": "West Lafayette, IN",
+    "acceptanceRate": 0.530,
+    "gpaAverage": 3.69,
+    "satAverage": 1310,
+    "actAverage": 29,
+    "tuition": 9992,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "umd",
+    "name": "University of Maryland",
+    "location": "College Park, MD",
+    "acceptanceRate": 0.440,
+    "gpaAverage": 4.36,
+    "satAverage": 1380,
+    "actAverage": 31,
+    "tuition": 10955,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "rutgers",
+    "name": "Rutgers University",
+    "location": "New Brunswick, NJ",
+    "acceptanceRate": 0.660,
+    "gpaAverage": 3.73,
+    "satAverage": 1300,
+    "actAverage": 29,
+    "tuition": 15804,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "fsu",
+    "name": "Florida State University",
+    "location": "Tallahassee, FL",
+    "acceptanceRate": 0.250,
+    "gpaAverage": 4.20,
+    "satAverage": 1290,
+    "actAverage": 29,
+    "tuition": 5656,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Very Important", "essayImportance": "Important" }
+  },
+  {
+    "id": "pennstate",
+    "name": "Penn State University",
+    "location": "University Park, PA",
+    "acceptanceRate": 0.550,
+    "gpaAverage": 3.60,
+    "satAverage": 1260,
+    "actAverage": 28,
+    "tuition": 18898,
+    "cds": { "gpaImportance": "Very Important", "rigorImportance": "Important", "essayImportance": "Considered" }
+  },
+  {
+    "id": "msu",
+    "name": "Michigan State University",
+    "location": "East Lansing, MI",
+    "acceptanceRate": 0.830,
+    "gpaAverage": 3.75,
+    "satAverage": 1210,
+    "actAverage": 26,
+    "tuition": 14914,
+    "cds": { "gpaImportance": "Important", "rigorImportance": "Important", "essayImportance": "Considered" }
+  }
 ]

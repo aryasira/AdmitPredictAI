@@ -1,2 +1,5 @@
-/* Deprecated. See main.css for V4 styles. */
-:root {}
+:root {
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
