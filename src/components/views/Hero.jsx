@@ -1,82 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { storage } from '../../lib/storage';
 
 export default function Hero({ setPage }) {
-    const [visitorCount, setVisitorCount] = useState(0);
     const [visible, setVisible] = useState(false);
 
-    // Visitor Counter Logic & Animation
+    // Animation trigger
     useEffect(() => {
-        // Trigger animation
         setTimeout(() => setVisible(true), 100);
-
-        async function init() {
-            try {
-                // Check if user has already visited in this session
-                const hasVisited = sessionStorage.getItem('ap_session_active');
-                const namespace = 'admitpredictai';
-                const key = 'visits';
-                const endpoint = `https://api.counterapi.dev/v1/${namespace}/${key}`;
-                
-                let response;
-                
-                if (!hasVisited) {
-                    // New session: Increment counter
-                    response = await fetch(`${endpoint}/up`);
-                    sessionStorage.setItem('ap_session_active', 'true');
-                } else {
-                    // Existing session: Just get current count
-                    response = await fetch(endpoint);
-                }
-
-                if (response.ok) {
-                    const data = await response.json();
-                    setVisitorCount(data.count);
-                } else {
-                    console.warn("Counter API failed, falling back to local storage");
-                    // Fallback to local storage if API fails
-                    fallbackToLocal();
-                }
-            } catch (e) {
-                console.error("Visitor count error", e);
-                fallbackToLocal();
-            }
-        }
-
-        function fallbackToLocal() {
-            try {
-                let count = 0;
-                const stored = storage.get(storage.KEYS.VISITORS);
-                if (stored !== null) count = parseInt(stored, 10);
-
-                const hasVisited = sessionStorage.getItem('ap_session_active_local');
-                if (!hasVisited) {
-                    count += 1;
-                    sessionStorage.setItem('ap_session_active_local', 'true');
-                    storage.set(storage.KEYS.VISITORS, count);
-                }
-                setVisitorCount(count);
-            } catch (err) {
-                console.error("Local fallback failed", err);
-            }
-        }
-
-        init();
-
-        // Polling every 10 seconds to keep count live
-        const poll = setInterval(async () => {
-            try {
-                const response = await fetch(`https://api.counterapi.dev/v1/admitpredictai/visits`);
-                if (response.ok) {
-                    const data = await response.json();
-                    setVisitorCount(data.count);
-                }
-            } catch (e) {
-                // Ignore polling errors
-            }
-        }, 10000);
-
-        return () => clearInterval(poll);
     }, []);
 
     return (
@@ -195,19 +124,7 @@ export default function Hero({ setPage }) {
                 </div>
             </section>
 
-            {/* 4b. VISITOR COUNTER (Cream) */}
-            <section style={{ background: '#F5F0E8', padding: '32px 24px', textAlign: 'center' }}>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '14px', color: '#7A7A7A' }}>
-                    <span style={{ marginRight: '8px' }}>👁</span>
-                    <strong style={{ color: '#2C2220', fontSize: '15px', fontWeight: 600 }}>{visitorCount.toLocaleString()}</strong> students have used AdmitPredict AI
-                </p>
-            </section>
-
-            {/* 4d. WHY ADMITPREDICT (White) - Alternating fix: 4b is Cream, so 4d should be White if 4c is gone.
-               Wait, 4a is White. 4b is Cream. 4d (Why) was Cream.
-               If I remove 4c (White), I have Cream (4b) then Cream (4d).
-               I need to make 4d White to alternate properly.
-            */}
+            {/* 4d. WHY ADMITPREDICT (White) */}
             <section style={{ background: '#FFFFFF', padding: '80px 24px' }}>
                 <div style={{ maxWidth: '1080px', margin: '0 auto', textAlign: 'center' }}>
                     <div style={{
