@@ -11,37 +11,70 @@ export default function Hero({ setPage }) {
         setTimeout(() => setVisible(true), 100);
 
         async function init() {
-            let count = 0; // Default base
-            
-            // 1. Get current count
             try {
-                const stored = storage.get(storage.KEYS.VISITORS);
-                if (stored !== null) {
-                    count = parseInt(stored, 10);
+                // Check if user has already visited in this session
+                const hasVisited = sessionStorage.getItem('ap_session_active');
+                const namespace = 'admitpredictai';
+                const key = 'visits';
+                const endpoint = `https://api.counterapi.dev/v1/${namespace}/${key}`;
+                
+                let response;
+                
+                if (!hasVisited) {
+                    // New session: Increment counter
+                    response = await fetch(`${endpoint}/up`);
+                    sessionStorage.setItem('ap_session_active', 'true');
+                } else {
+                    // Existing session: Just get current count
+                    response = await fetch(endpoint);
+                }
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setVisitorCount(data.count);
+                } else {
+                    console.warn("Counter API failed, falling back to local storage");
+                    // Fallback to local storage if API fails
+                    fallbackToLocal();
                 }
             } catch (e) {
-                console.error("Visitor read error", e);
+                console.error("Visitor count error", e);
+                fallbackToLocal();
             }
-
-            // 2. Increment if new session
-            const hasVisited = sessionStorage.getItem('ap_session_active');
-            if (!hasVisited) {
-                count += 1;
-                sessionStorage.setItem('ap_session_active', 'true');
-                storage.set(storage.KEYS.VISITORS, count);
-            }
-            
-            setVisitorCount(count);
         }
+
+        function fallbackToLocal() {
+            try {
+                let count = 0;
+                const stored = storage.get(storage.KEYS.VISITORS);
+                if (stored !== null) count = parseInt(stored, 10);
+
+                const hasVisited = sessionStorage.getItem('ap_session_active_local');
+                if (!hasVisited) {
+                    count += 1;
+                    sessionStorage.setItem('ap_session_active_local', 'true');
+                    storage.set(storage.KEYS.VISITORS, count);
+                }
+                setVisitorCount(count);
+            } catch (err) {
+                console.error("Local fallback failed", err);
+            }
+        }
+
         init();
 
-        // 3. Polling every 5 seconds
-        const poll = setInterval(() => {
-            const stored = storage.get(storage.KEYS.VISITORS);
-            if (stored) {
-                setVisitorCount(parseInt(stored, 10));
+        // Polling every 10 seconds to keep count live
+        const poll = setInterval(async () => {
+            try {
+                const response = await fetch(`https://api.counterapi.dev/v1/admitpredictai/visits`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setVisitorCount(data.count);
+                }
+            } catch (e) {
+                // Ignore polling errors
             }
-        }, 5000);
+        }, 10000);
 
         return () => clearInterval(poll);
     }, []);
