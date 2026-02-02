@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import Hero from './components/views/Hero';
@@ -130,6 +131,7 @@ function App() {
         </ErrorBoundary>
       </main>
       <Footer setPage={navigate} />
+      <Analytics />
     </div>
   );
 }
