@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { storage } from '../../lib/storage';
 
 export default function Hero({ setPage }) {
-    const [visitorCount, setVisitorCount] = useState(12847);
+    const [visitorCount, setVisitorCount] = useState(0);
     const [visible, setVisible] = useState(false);
 
     // Visitor Counter Logic & Animation
@@ -11,12 +11,12 @@ export default function Hero({ setPage }) {
         setTimeout(() => setVisible(true), 100);
 
         async function init() {
-            let count = 12847; // Default base
+            let count = 0; // Default base
             
             // 1. Get current count
             try {
                 const stored = storage.get(storage.KEYS.VISITORS);
-                if (stored) {
+                if (stored !== null) {
                     count = parseInt(stored, 10);
                 }
             } catch (e) {
