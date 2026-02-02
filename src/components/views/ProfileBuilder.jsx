@@ -479,7 +479,7 @@ export default function ProfileBuilder({ onComplete }) {
                         
                         <div className="mb-6">
                             <label className="text-sm font-medium text-[#2C2220] mb-1 block">
-                                Extracurricular Clubs <span className="text-red-500">*</span>
+                                Extracurricular Clubs (Type and press Enter to add) <span className="text-red-500">*</span>
                             </label>
                             <TagInput 
                                 tags={formData.extracurriculars}
