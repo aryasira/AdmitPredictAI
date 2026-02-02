@@ -100,10 +100,6 @@ export default function Transparency() {
                             q="Can I save my results?" 
                             a="Your results are automatically saved to your browser's local storage. You can return to your dashboard anytime on this device to see your saved predictions and track your growth." 
                         />
-                        <AccordionItem 
-                            q="Why do you need my API key?" 
-                            a="Currently, we are a client-side application. To keep costs zero for us and free for you, you can use your own Groq API key (which has a generous free tier) to power the intelligence." 
-                        />
                     </div>
                 </div>
             </section>
